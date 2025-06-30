@@ -79,7 +79,7 @@ export const LoginPage: React.FC = () => {
       if (isLogin) {
         const { error } = await signIn(email, password);
         if (error) {
-          setError(error.message);
+          setError((error as any).message);
         } else {
           // Store remember me preference
           if (rememberMe) {
@@ -91,17 +91,18 @@ export const LoginPage: React.FC = () => {
         const { error } = await signUp(email, password, fullName);
         if (error) {
           // Handle specific error cases with better messaging
-          if (error.message.includes('User already registered')) {
+          const errMsg = (error as any).message || '';
+          if (errMsg.includes('User already registered')) {
             setError('An account with this email already exists. Please sign in instead.');
             // Automatically switch to login mode
             setTimeout(() => {
               setIsLogin(true);
               setError('');
             }, 3000);
-          } else if (error.message.includes('weak_password')) {
+          } else if (errMsg.includes('weak_password')) {
             setError('Password must be at least 6 characters long');
           } else {
-            setError(error.message);
+            setError(errMsg);
           }
         } else {
           setError('');
@@ -113,14 +114,14 @@ export const LoginPage: React.FC = () => {
     }
   };
 
-  const handleWeb3Success = async (address: string, signature: string, message: string) => {
+  const handleWeb3Success = async (address: string, signature: string) => {
     try {
       setError('');
       clearError();
       
       console.log('Web3 authentication initiated:', { address, hasSignature: !!signature });
       
-      const { isNewUser } = await signInWithWallet(address, signature, message);
+      const { isNewUser } = await signInWithWallet(address, signature);
       
       if (isNewUser) {
         alert('Welcome! Your Web3 account has been created successfully.');

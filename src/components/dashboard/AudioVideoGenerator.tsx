@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
-import { Upload, Mic, Loader2, Download, Play, Zap } from 'lucide-react';
+import { Upload, Mic, Loader2, Download, Play } from 'lucide-react';
 
 interface GeneratedVideo {
   video_id: string;

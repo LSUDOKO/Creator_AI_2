@@ -19,7 +19,7 @@ import {
   Zap,
   CheckCircle
 } from 'lucide-react';
-import { ElevenLabsTranscriptionResult, ElevenLabsTranscriber, checkElevenLabsStatus } from '../lib/elevenlabs';
+import { ElevenLabsTranscriber, checkElevenLabsStatus } from '../lib/elevenlabs';
 import { useElevenLabsTranscription } from '../hooks/useElevenLabsTranscription';
 
 interface ElevenLabsTranscriptionPanelProps {
@@ -45,8 +45,6 @@ export const ElevenLabsTranscriptionPanel: React.FC<ElevenLabsTranscriptionPanel
     isTranscribing,
     isInitializing,
     transcriptionError,
-    startTranscription,
-    stopTranscription,
     toggleTranscription,
     transcribeFile,
     clearTranscriptions,

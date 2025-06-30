@@ -25,7 +25,6 @@ import { PicaAPI } from '../../lib/pica';
 export const PicaSocialConnector: React.FC = () => {
   const [showAuthKit, setShowAuthKit] = useState(false);
   const {
-    connectedAccounts,
     isLoading,
     error,
     connectAccount,

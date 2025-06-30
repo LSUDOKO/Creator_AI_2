@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
-import { Button } from '../ui/button';
 import { Switch } from '../ui/switch';
-import { Play, Calendar, FileText, TrendingUp } from 'lucide-react';
+import { Play, Calendar, FileText } from 'lucide-react';
 
 export const ControlPanel: React.FC = () => {
   const [automations, setAutomations] = useState({

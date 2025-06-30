@@ -14,7 +14,6 @@ import {
   Plus,
   Settings,
   Facebook,
-  Instagram,
   Share2,
   Info
 } from 'lucide-react';

@@ -127,9 +127,9 @@ export class WhisperTranscriber {
       let text = '';
       let language = undefined;
 
-      if (this.config.response_format === 'verbose_json' && typeof transcription === 'object') {
+      if (this.config.response_format === 'verbose_json' && typeof transcription === 'object' && 'language' in transcription) {
         text = transcription.text;
-        language = transcription.language;
+        language = (transcription as any).language;
       } else if (typeof transcription === 'string') {
         text = transcription;
       } else if (typeof transcription === 'object' && 'text' in transcription) {
@@ -295,8 +295,6 @@ export class WhisperTranscriber {
 export async function convertAudioToSupportedFormat(file: File): Promise<File> {
   return new Promise((resolve, reject) => {
     const audio = new Audio();
-    const canvas = document.createElement('canvas');
-    const ctx = canvas.getContext('2d');
     
     audio.onloadedmetadata = () => {
       // For now, return the original file

@@ -2,7 +2,6 @@ import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Button } from '../ui/button';
-import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import { 
   Video, 
@@ -14,7 +13,6 @@ import {
   VolumeX,
   Maximize,
   Upload,
-  User,
   FileText,
   Mic
 } from 'lucide-react';
@@ -507,8 +505,8 @@ export const EnhancedVideoGenerator: React.FC = () => {
                                         variant="ghost"
                                         size="icon"
                                         onClick={() => {
-                                          const video = videoRefs.current[video.video_id];
-                                          if (video) video.requestFullscreen();
+                                          const videoEl = videoRefs.current[video.video_id] as HTMLVideoElement | undefined;
+                                          if (videoEl) videoEl.requestFullscreen();
                                         }}
                                         className="bg-black/50 hover:bg-black/70"
                                       >

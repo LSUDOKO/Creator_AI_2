@@ -17,7 +17,7 @@ import {
   BarChart3,
   Languages
 } from 'lucide-react';
-import { WhisperTranscriptionResult, WhisperTranscriber } from '../lib/whisper';
+import { WhisperTranscriber } from '../lib/whisper';
 import { useWhisperTranscription } from '../hooks/useWhisperTranscription';
 
 interface WhisperTranscriptionPanelProps {
@@ -41,8 +41,6 @@ export const WhisperTranscriptionPanel: React.FC<WhisperTranscriptionPanelProps>
     isTranscribing,
     isInitializing,
     transcriptionError,
-    startTranscription,
-    stopTranscription,
     toggleTranscription,
     transcribeFile,
     clearTranscriptions,

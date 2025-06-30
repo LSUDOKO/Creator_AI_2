@@ -90,28 +90,28 @@ export const formatWalletAddress = (address: string): string => {
 }
 
 export const connectWallet = async (): Promise<{ address: string; signature: string }> => {
-  if (!isWeb3Supported()) {
+  if (!isWeb3Supported() || !window.ethereum) {
     throw new Error('Web3 wallet not supported or not installed')
   }
 
   try {
     // Request account access
-    const accounts = await window.ethereum.request({
+    const accounts = await window.ethereum!.request({
       method: 'eth_requestAccounts'
-    })
+    }) as string[];
 
     if (!accounts || accounts.length === 0) {
-      throw new Error('No accounts found')
+      throw new Error('No accounts found');
     }
 
-    const address = accounts[0]
+    const address = accounts[0];
     const message = `Sign this message to authenticate: ${Date.now()}`
     
     // Request signature
-    const signature = await window.ethereum.request({
+    const signature = await window.ethereum!.request({
       method: 'personal_sign',
       params: [message, address]
-    })
+    }) as string;
 
     return { address, signature }
   } catch (error) {
@@ -147,8 +147,8 @@ export const getConnectedWallet = (): WalletConnectionDetails => {
 declare global {
   interface Window {
     ethereum?: {
-      isMetaMask?: boolean
-      request: (args: { method: string; params?: any[] }) => Promise<any>
+      isMetaMask?: boolean;
+      request: (args: { method: string; params?: any[] }) => Promise<unknown>;
     }
   }
 }

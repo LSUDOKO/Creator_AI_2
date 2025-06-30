@@ -14,7 +14,7 @@ import { useAuth } from './hooks/useAuth';
 
 function App() {
   const [currentPage, setCurrentPage] = useAtom(currentPageAtom);
-  const { user, isLoading } = useAuth();
+  const { isLoading } = useAuth();
 
   // Show loading only for a maximum of 3 seconds
   const [showLoading, setShowLoading] = React.useState(true);

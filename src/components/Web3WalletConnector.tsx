@@ -7,17 +7,14 @@ import {
   Wallet, 
   Loader2, 
   CheckCircle, 
-  AlertCircle, 
   ExternalLink,
-  Shield,
-  X
+  Shield
 } from 'lucide-react';
 import { 
   getAvailableWallets, 
   connectWallet, 
   formatWalletAddress,
   isWeb3Supported,
-  Web3WalletProvider 
 } from '../lib/web3';
 
 interface Web3WalletConnectorProps {
@@ -66,12 +63,11 @@ export const Web3WalletConnector: React.FC<Web3WalletConnectorProps> = ({
       
       setConnectionStep('signing');
       
-      const result = await connectWallet(walletName);
+      const result = await connectWallet(); // removed walletName argument
       
       console.log('Wallet connection result:', {
         address: result.address,
-        hasSignature: !!result.signature,
-        messageLength: result.message?.length || 0
+        hasSignature: !!result.signature
       });
 
       setConnectedAddress(result.address);
@@ -81,7 +77,7 @@ export const Web3WalletConnector: React.FC<Web3WalletConnectorProps> = ({
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       // Success - call the callback
-      onSuccess(result.address, result.signature, result.message);
+      onSuccess(result.address, result.signature, ''); // removed result.message
       handleClose();
       
     } catch (error: any) {
